@@ -190,7 +190,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, provide } from "vue";
+import { ref, onMounted } from "vue";
 import { Country } from "~/types/country";
 
 const mapTimezoneRef = ref<SVGElement>();

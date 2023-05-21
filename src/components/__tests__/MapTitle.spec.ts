@@ -11,7 +11,7 @@ describe("Component MapTitle", () => {
 
     const { findByText } = render(MapTitle, {
       props: {
-        ofsetTimezoneAmericaSaoPaulo,
+        ofsetTimezone: ofsetTimezoneAmericaSaoPaulo,
       },
     });
 
