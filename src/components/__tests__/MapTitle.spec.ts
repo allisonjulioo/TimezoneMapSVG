@@ -3,20 +3,20 @@ import MapTitle from "../MapTitle.vue";
 
 describe("Component MapTitle", () => {
   it("should display correctly formatted offset and UTC", async () => {
-    const ofsetTimezone = -3;
+    const ofsetTimezoneAmericaSaoPaulo = -3;
 
     const formatter = { timeZone: "America/Sao_Paulo" };
 
     const localData = new Date().toLocaleString("pt-BR", formatter);
 
-    const wrapper = render(MapTitle, {
+    const { findByText } = render(MapTitle, {
       props: {
-        ofsetTimezone,
+        ofsetTimezoneAmericaSaoPaulo,
       },
     });
 
-    expect(await wrapper.findByText(/( UTC -3:00 )/i));
+    expect(await findByText(/( UTC -3:00 )/i));
 
-    expect(await wrapper.findByText(localData));
+    expect(await findByText(localData));
   });
 });

@@ -14,7 +14,9 @@ import { computed } from "vue";
 import { formatTimezoneOffset } from "~/utils/formatTimezoneOffset";
 import { formatterOffset } from "~/utils/formatterOffset";
 
-const props = defineProps<{ ofsetTimezone: number }>();
+const props = defineProps({
+  ofsetTimezone: { type: Number, required: true, default: 0 },
+});
 
 const utcFormatted = computed(() => formatterOffset(props.ofsetTimezone));
 

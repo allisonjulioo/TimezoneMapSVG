@@ -8,6 +8,7 @@
     height="800"
     viewBox="-242 42 1553 1126"
     class="map-timezone"
+    title="timezones"
   >
     <path
       fill="hsl(60, 100%, 65%)"
