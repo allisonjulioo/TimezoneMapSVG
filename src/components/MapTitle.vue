@@ -9,22 +9,27 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
+<script>
 import { formatTimezoneOffset } from "~/utils/formatTimezoneOffset";
 import { formatterOffset } from "~/utils/formatterOffset";
 
-const props = defineProps({
-  ofsetTimezone: { type: Number, required: true, default: 0 },
-});
+export default {
+  props: {
+    ofsetTimezone: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+  },
 
-const utcFormatted = computed(() => formatterOffset(props.ofsetTimezone));
+  computed: {
+    utcFormatted() {
+      return formatterOffset(this.ofsetTimezone);
+    },
 
-const offsetFormatted = computed(() =>
-  formatTimezoneOffset(props.ofsetTimezone)
-);
-</script>
-
-<script lang="ts">
-export default {};
+    offsetFormatted() {
+      return formatTimezoneOffset(this.ofsetTimezone);
+    },
+  },
+};
 </script>

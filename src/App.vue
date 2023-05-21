@@ -5,15 +5,26 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from "vue";
+<script>
 import MapTimezone from "~/components/MapTimezone.vue";
 import MapTitle from "~/components/MapTitle.vue";
-import { Country } from "~/types/country";
 
-const ofsetTimezone = ref<number>();
+export default {
+  components: {
+    MapTimezone,
+    MapTitle,
+  },
 
-const HandleonOverCountry = (currentOfsetTimezone: string) => {
-  ofsetTimezone.value = +currentOfsetTimezone ?? 0;
+  data() {
+    return {
+      ofsetTimezone: 0,
+    };
+  },
+
+  methods: {
+    HandleonOverCountry(currentOfsetTimezone) {
+      this.ofsetTimezone = +currentOfsetTimezone ?? 0;
+    },
+  },
 };
 </script>

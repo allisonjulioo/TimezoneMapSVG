@@ -189,33 +189,32 @@
   </svg>
 </template>
 
-<script lang="ts" setup>
-import { ref, onMounted, provide } from "vue";
-import { Country } from "~/types/country";
+<script>
+export default {
+  emits: ["onOverCountry"],
 
-const mapTimezoneRef = ref<SVGElement>();
+  methods: {
+    handleOverCountry(event) {
+      const ofsetTimezone = event.classList.value;
 
-const emit = defineEmits(["onOverCountry"]);
+      this.$emit("onOverCountry", ofsetTimezone);
+    },
+  },
 
-const handleOverCountry = (event: SVGPathElement) => {
-  const ofsetTimezone = event.classList.value;
+  mounted() {
+    const mapTimezoneRef = this.$refs.mapTimezoneRef;
 
-  emit("onOverCountry", ofsetTimezone);
+    if (mapTimezoneRef) {
+      const countries = mapTimezoneRef.querySelectorAll("path");
+
+      countries.forEach((country) => {
+        country.addEventListener("mouseover", () =>
+          this.handleOverCountry(country)
+        );
+      });
+    }
+  },
 };
-
-onMounted(() => {
-  if (mapTimezoneRef.value) {
-    const countries = mapTimezoneRef.value.querySelectorAll("path");
-
-    countries.forEach((country: SVGPathElement) => {
-      country.addEventListener("mouseover", () => handleOverCountry(country));
-    });
-  }
-});
-</script>
-
-<script lang="ts">
-export default {};
 </script>
 
 <style scoped lang="scss">
