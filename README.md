@@ -1,18 +1,64 @@
 # Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+#### This project was builded with two architetures
 
-## Recommended IDE Setup
+1- Script setup [docs](https://vuejs.org/api/sfc-script-setup.html)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+branch: `vue-script-setup`
 
-## Type Support For `.vue` Imports in TS
+```
+<script setup>
+// variable
+const msg = 'Hello!'
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+// functions
+function log() {
+  console.log(msg)
+}
+</script>
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+<template>
+  <button @click="log">{{ msg }}</button>
+</template>
+```
+<hr/>
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+2- SFC Syntax Specification [docs](https://vuejs.org/api/sfc-spec.html)
+
+branch: `vue-context-this`
+
+```
+<template>
+ <div class="example">{{ msg }}</div>
+</template>
+
+<script>
+export default {
+ data() {
+   return {
+     msg: 'Hello world!'
+   }
+ }
+}
+</script>
+
+<style>
+.example {
+ color: red;
+}
+</style>
+```
+
+# Running project
+
+#### Install dependencies
+
+`npm install`
+
+#### Run local serve with hot reload
+
+`npm run dev`
+
+#### Run tests
+
+`npm run test`
