@@ -9,20 +9,43 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed } from "vue";
+<script lang="ts" setup>
 import { formatTimezoneOffset } from "~/utils/formatTimezoneOffset";
 import { formatterOffset } from "~/utils/formatterOffset";
+import { useTimezone } from "~/store/useTimezone";
 
-const props = defineProps({
-  ofsetTimezone: { type: Number, required: true, default: 0 },
+import { ref, onMounted } from "vue";
+
+const interval = ref();
+
+const utcFormatted = ref("00:00");
+
+const offsetFormatted = ref("Mouse over the zone");
+
+const { $state, $subscribe } = useTimezone();
+
+const staryPullingUpdate = (ofsetTimezone: string) => {
+  interval.value = setInterval(() => {
+    offsetFormatted.value = formatTimezoneOffset(+ofsetTimezone);
+  }, 1000);
+};
+
+const unsubscribe = $subscribe((_, { ofsetTimezone }) => {
+  clearInterval(interval.value);
+
+  utcFormatted.value = formatterOffset(+ofsetTimezone);
+
+  offsetFormatted.value = formatTimezoneOffset(+ofsetTimezone);
+
+  staryPullingUpdate(ofsetTimezone);
 });
 
-const utcFormatted = computed(() => formatterOffset(props.ofsetTimezone));
-
-const offsetFormatted = computed(() =>
-  formatTimezoneOffset(props.ofsetTimezone)
-);
+onMounted(() => {
+  return () => {
+    clearInterval(interval.value);
+    unsubscribe();
+  };
+});
 </script>
 
 <script lang="ts">

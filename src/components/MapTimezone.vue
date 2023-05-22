@@ -190,20 +190,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
-import { Country } from "~/types/country";
+import { onMounted, ref } from "vue";
+import { useTimezone } from "~/store/useTimezone";
+
+const { setOfsetTimezone } = useTimezone();
 
 const mapTimezoneRef = ref<SVGElement>();
 
-const emit = defineEmits(["onOverCountry"]);
-
-const handleOverCountry = (event: SVGPathElement) => {
+const handleOverCountry = (event: SVGElement) => {
   const ofsetTimezone = event.classList.value;
 
-  emit("onOverCountry", ofsetTimezone);
+  setOfsetTimezone(ofsetTimezone);
 };
 
 onMounted(() => {
+  setOfsetTimezone("0");
+
   if (mapTimezoneRef.value) {
     const countries = mapTimezoneRef.value.querySelectorAll("path");
 
