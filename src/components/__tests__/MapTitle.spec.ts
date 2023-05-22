@@ -14,7 +14,7 @@ describe("Component MapTitle", () => {
   it("should display correctly formatted offset and UTC", async () => {
     const timerStore = useTimezone();
 
-    const ofsetTimezoneAmericaSaoPaulo = -3;
+    const ofsetTimezoneAmericaSaoPaulo = '-3';
 
     const formatter = { timeZone: "America/Sao_Paulo" };
 

@@ -4,14 +4,14 @@ export const useTimezone = defineStore({
   id: "timezone",
   state: () => {
     return {
-      ofsetTimezone: 0,
+      ofsetTimezone: "0",
     };
   },
   getters: {
     dataOfsetTimezone: (state) => state.ofsetTimezone,
   },
   actions: {
-    setOfsetTimezone(ofsetTimezone: number) {
+    setOfsetTimezone(ofsetTimezone: string) {
       this.ofsetTimezone = ofsetTimezone;
     },
   },

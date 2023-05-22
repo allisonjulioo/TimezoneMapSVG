@@ -4,7 +4,9 @@ import { useTimezone } from "../store/useTimezone";
 
 describe("Component MapTitle", () => {
   it("should display default title map header", async () => {
-    const defaultUTCData = "Mouse over the zone";
+    const formatter = { timeZone: "utc" };
+
+   const defaultUTCData = new Date().toLocaleString("pt-BR", formatter);
 
     const defaultUTC = "( UTC 00:00 )";
 
@@ -22,7 +24,7 @@ describe("Component MapTitle", () => {
 
     const timerStore = useTimezone();
 
-    timerStore.setOfsetTimezone(-3);
+    timerStore.setOfsetTimezone("-3");
 
     const defaultUTCData = new Date().toLocaleString("pt-BR", formatter);
 
