@@ -12,24 +12,44 @@
 <script>
 import { formatTimezoneOffset } from "~/utils/formatTimezoneOffset";
 import { formatterOffset } from "~/utils/formatterOffset";
+import { useTimezone } from "~/store/useTimezone";
 
 export default {
-  props: {
-    ofsetTimezone: {
-      type: Number,
-      required: true,
-      default: 0,
+  data() {
+    return {
+      unsubscribe: null,
+      interval: null,
+      unsubscribe: {},
+      utcFormatted: "00:00",
+      offsetFormatted: "Mouse over the zone",
+    };
+  },
+
+  methods: {
+    staryPullingUpdate(ofsetTimezone) {
+      this.interval = setInterval(() => {
+        this.offsetFormatted = formatTimezoneOffset(ofsetTimezone);
+      }, 1000);
     },
   },
 
-  computed: {
-    utcFormatted() {
-      return formatterOffset(this.ofsetTimezone);
-    },
+  mounted() {
+    const { $state, $subscribe } = useTimezone();
 
-    offsetFormatted() {
-      return formatTimezoneOffset(this.ofsetTimezone);
-    },
+    this.unsubscribe = $subscribe((_, { ofsetTimezone }) => {
+      clearInterval(this.interval);
+
+      this.utcFormatted = formatterOffset(ofsetTimezone);
+
+      this.offsetFormatted = formatTimezoneOffset(ofsetTimezone);
+
+      this.staryPullingUpdate(ofsetTimezone);
+    });
+  },
+
+  beforeUnmount() {
+    clearInterval(this.interval);
+    this.unsubscribe();
   },
 };
 </script>

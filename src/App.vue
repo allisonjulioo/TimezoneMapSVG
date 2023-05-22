@@ -1,7 +1,7 @@
 <template>
   <div>
-    <map-title :ofsetTimezone="ofsetTimezone" />
-    <map-timezone @onOverCountry="HandleonOverCountry" />
+    <map-title />
+    <map-timezone />
   </div>
 </template>
 
@@ -13,18 +13,6 @@ export default {
   components: {
     MapTimezone,
     MapTitle,
-  },
-
-  data() {
-    return {
-      ofsetTimezone: 0,
-    };
-  },
-
-  methods: {
-    HandleonOverCountry(currentOfsetTimezone) {
-      this.ofsetTimezone = +currentOfsetTimezone ?? 0;
-    },
   },
 };
 </script>

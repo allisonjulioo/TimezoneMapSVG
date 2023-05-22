@@ -190,19 +190,27 @@
 </template>
 
 <script>
-export default {
-  emits: ["onOverCountry"],
+import { useTimezone } from "~/store/useTimezone";
 
+export default {
   methods: {
+    sendToStore(ofsetTimezone) {
+      const { setOfsetTimezone } = useTimezone();
+
+      setOfsetTimezone(ofsetTimezone);
+    },
+
     handleOverCountry(event) {
       const ofsetTimezone = event.classList.value;
 
-      this.$emit("onOverCountry", ofsetTimezone);
+      this.sendToStore(ofsetTimezone);
     },
   },
 
   mounted() {
     const mapTimezoneRef = this.$refs.mapTimezoneRef;
+
+    this.sendToStore(0);
 
     if (mapTimezoneRef) {
       const countries = mapTimezoneRef.querySelectorAll("path");
