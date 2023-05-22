@@ -1,13 +1,8 @@
 import { fireEvent, render } from "@testing-library/vue";
-import { createPinia, setActivePinia } from "pinia";
 import { useTimezone } from "../../store/useTimezone";
 import MapTimezone from "../MapTimezone.vue";
 
 describe("Component MapTimezone", () => {
-  beforeEach(() => {
-    setActivePinia(createPinia());
-  });
-
   it('should store "onOverCountry" event when country is hovered', async () => {
     const { findByTitle } = render(MapTimezone);
 

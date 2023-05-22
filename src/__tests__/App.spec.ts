@@ -1,13 +1,8 @@
 import { render, screen } from "@testing-library/vue";
-import { createPinia, setActivePinia } from "pinia";
 import App from "../App.vue";
 import { useTimezone } from "../store/useTimezone";
 
 describe("Component MapTitle", () => {
-  beforeEach(() => {
-    setActivePinia(createPinia());
-  });
-
   it("should display default title map header", async () => {
     const defaultUTCData = "Mouse over the zone";
 

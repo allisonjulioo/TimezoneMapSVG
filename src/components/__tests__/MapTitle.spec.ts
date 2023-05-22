@@ -1,13 +1,8 @@
 import { render } from "@testing-library/vue";
-import { createPinia, setActivePinia } from "pinia";
 import { useTimezone } from "../../store/useTimezone";
 import MapTitle from "../MapTitle.vue";
 
 describe("Component MapTitle", () => {
-  beforeEach(() => {
-    setActivePinia(createPinia());
-  });
-
   it("should display correctly default title", async () => {
     const { findByText } = render(MapTitle);
 
