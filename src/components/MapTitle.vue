@@ -22,7 +22,7 @@ const utcFormatted = ref("00:00");
 
 const offsetFormatted = ref("Mouse over the zone");
 
-const { $state, $subscribe } = useTimezone();
+const { $subscribe } = useTimezone();
 
 const staryPullingUpdate = (ofsetTimezone: string) => {
   interval.value = setInterval(() => {
